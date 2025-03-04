@@ -9,7 +9,7 @@ import {
 } from "../config/ChatLogics";
 import { ChatState } from "../Context/contextProvider";
 
-const ScrollableChat = ({ messages }) => {
+const ScrollableChat = ({ messages ,onDeleteMessage}) => {
   const { user } = ChatState();
 
   return (
@@ -44,6 +44,24 @@ const ScrollableChat = ({ messages }) => {
             >
               {m.content}
             </span>
+
+
+            {m.sender._id === user._id && (
+              <button
+                style={{
+                  marginLeft: "10px",
+                 
+                  color: "white",
+                  border: "none",
+                  padding: "5px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+                onClick={() => onDeleteMessage(m._id)}
+              >
+                ❌
+              </button>
+            )}
           </div>
         ))}
     </ScrollableFeed>

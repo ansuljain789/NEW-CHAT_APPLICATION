@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import { ChatState } from '../Context/contextProvider';
-import { Box, FormControl, IconButton, Input, Spinner, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, FormControl, IconButton, Input, Spinner, Text, useToast } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import {getSender,getSenderFull} from "../config/ChatLogics"
 import ProfileModal from './mainPages/ProfileModal';
@@ -10,6 +10,8 @@ import "./styles.css"
 import ScrollableChat from './ScrollableChat';
 import io from "socket.io-client";
 import animationData from '../animations/typing.json'
+import { BsSend } from "react-icons/bs";
+
 
 import Lottie from 'react-lottie'
 const ENDPOINT = "http://localhost:5000";
@@ -23,6 +25,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
   const [socketConnected,setSocketConnected] = useState(false)
   const [typing,setTyping] = useState(false)
   const [istyping,setIsTyping] = useState(false)
+  
 
 
   const defaultOptions = {
@@ -33,7 +36,7 @@ const SingleChat = ({fetchAgain,setFetchAgain}) => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-
+  
 
  const { user,selectedChat, setSelectedChat,notification,setNotification} = ChatState();
 
@@ -49,7 +52,7 @@ useEffect(()=>{
 
   const sendMessage = async(event) =>{
     socket.emit('stop typing',selectedChat._id)
-    if(event.key === "Enter" && newMessage){
+    if((event.type==="click" ) && newMessage){
           try{
             const config = {
               headers: {
@@ -130,8 +133,7 @@ useEffect(()=>{
         `http://localhost:5000/api/message/${selectedChat._id}`,
         config
       );
-      console.log(data);
-      
+ 
       setMessages(data);
       setLoading(false);
      socket.emit("join chat",selectedChat._id)
@@ -147,13 +149,51 @@ useEffect(()=>{
       });
     }
   };
+
   
+  
+  const handleDeleteMessage = async (messageId) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+  
+      await axios.delete(`http://localhost:5000/api/message/${messageId}`, config);
+  
+      // Remove the deleted message from the state
+      setMessages(messages.filter((msg) => msg._id !== messageId));
+  
+      toast({
+        title: "Message deleted",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+  
+      socket.emit("message deleted", messageId);
+    } catch (error) {
+      toast({
+        title: "Error deleting message",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
+  
+
+
+
+
   useEffect(() => {
    fetchMessages();
 
   selectedChatCompare = selectedChat
   }, [selectedChat])
-  
   
   
 
@@ -266,34 +306,38 @@ useEffect(()=>{
                     ):(
                           <div className='messages'>
 
-                            <ScrollableChat messages= {messages}/>
+                            <ScrollableChat messages= {messages} onDeleteMessage={handleDeleteMessage} />
                           </div>
                     )}
 
-                    <FormControl
-                           onKeyDown={sendMessage}
-                           isRequired mt={3}
-                    >
+                    <FormControl onKeyDown={sendMessage} sRequired mt={3}>
                     {istyping?<div>
-                       <Lottie
-                        options = {defaultOptions}
-
-                      width={70}
-                      style={{marginBottom:15,marginLeft:0}}
-                      
-                      />
-
-
-
+                       <Lottie options = {defaultOptions}  width={70}  style={{marginBottom:15,marginLeft:0}}  />
                     </div>:<></>}
-                     <Input
+                     {/* <Input
                       variant="filled"
                       bg="#E0E0E0"
                       placeholder="Enter a message.."
                       value={newMessage}
                       onChange={typingHandler}
                      
-                     />
+                     /> */}
+                      <Box display="flex" alignItems="center">
+    <Input
+      variant="filled"
+      bg="#E0E0E0"
+      placeholder="Enter a message..."
+      value={newMessage}
+      onChange={typingHandler}
+    />
+    <Button
+      onClick={sendMessage}  // Call sendMessage when button is clicked
+      colorScheme="blue"
+      ml={2}
+    >
+         <BsSend />
+    </Button>
+  </Box>
 
                     </FormControl>
 
