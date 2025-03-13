@@ -66,7 +66,7 @@ const Signup = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setPicLoading(false);
-       navigate('/')
+       navigate('/login')
     } catch (error) {
       toast({
         title: "Error Occured!",
