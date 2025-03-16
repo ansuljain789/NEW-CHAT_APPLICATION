@@ -33,7 +33,7 @@ const ProfileModal = ({ user, children }) => {
             d="flex"
             justifyContent="center"
           >
-            {user.name}
+            {user.name} 
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody

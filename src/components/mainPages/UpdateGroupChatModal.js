@@ -222,7 +222,6 @@ const UpdateGroupChatModal = ({fetchAgain,setFetchAgain,fetchMessages}) => {
           justifyContent={"center"}
         
         >{selectedChat.chatName}</ModalHeader>
-
         <ModalCloseButton />
         <ModalBody>
                <Box w="100%" d="flex" flexWrap={"wrap"} pb={3}>
