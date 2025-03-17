@@ -9,11 +9,8 @@ import {
   Spinner,
   Text,
   useToast,
-  Menu,
-  MenuItem,
-  MenuButton,
 } from "@chakra-ui/react";
-import { ArrowBackIcon, PhoneIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon} from "@chakra-ui/icons";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import ProfileModal from "./mainPages/ProfileModal";
 import UpdateGroupChatModal from "./mainPages/UpdateGroupChatModal";
@@ -25,6 +22,8 @@ import animationData from "../animations/typing.json";
 import { BsSend } from "react-icons/bs";
 import { useRef } from "react";
 import { FaMicrophone } from "react-icons/fa";
+import VoiceCallButton from "./voiceCall";
+
 
 import Lottie from "react-lottie";
 const ENDPOINT = "http://localhost:5000";
@@ -501,10 +500,11 @@ const startListening = () => {
             )}
 
              {/* voice call will added here */}
-         {/* <IconButton
 
-                 icon={<PhoneIcon />}
-         /> */}
+            
+        
+             <VoiceCallButton 
+/>
           </Text>
         
           <Box
