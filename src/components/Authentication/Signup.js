@@ -15,6 +15,8 @@ const Signup = () => {
   const [password, setPassword] = useState();
   const [pic, setPic] = useState();
   const [picLoading, setPicLoading] = useState(false);
+
+  const END = process.env.REACT_APP_ENDPOINT
  
   const submitHandler = async () => {
     setPicLoading(true);
@@ -47,7 +49,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/user",
+        `${END}/api/user`,
         {
           name,
           email,

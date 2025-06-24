@@ -7,6 +7,11 @@ import axios from "axios";
  import { useNavigate} from "react-router-dom";
   import { ChatState } from "../../Context/contextProvider";
   import {ChatPage} from "../../pages/ChatPage"
+  import ForgotPassword from "./ForgotPassword"; // ✅ default import
+
+
+  const END = process.env.REACT_APP_ENDPOINT
+
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -42,7 +47,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/user/login",
+       `${END}/api/user/login`,
         { email, password },
         config
       );
@@ -72,7 +77,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-
   return (
     <VStack spacing="10px">
       <FormControl id="email" isRequired>
@@ -109,17 +113,9 @@ const Login = () => {
       >
         Login
       </Button>
-      <Button
-        variant="solid"
-        colorScheme="red"
-        width="100%"
-        onClick={() => {
-          setEmail("guest@example.com");
-          setPassword("123456");
-        }}
-      >
-        Get Guest User Credentials
-      </Button>
+
+
+      
     </VStack>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react'
 import {Box, Container, Tab, TabList, TabPanel, TabPanels, Tabs, Text} from '@chakra-ui/react'
 import Login from '../components/Authentication/Login';
 import Signup from '../components/Authentication/Signup';
+import ForgotPassword from '../components/Authentication/ForgotPassword';
 
 const HomePage = () => {
   return <Container maxW='xl' centerContent>
@@ -27,8 +28,9 @@ const HomePage = () => {
    <Box bg="white" w="100%" p={4} borderRadius="lg" color="black" borderWidth="1px">
   <Tabs>
   <TabList mb="1em">
-            <Tab width="50%">Login</Tab>
-            <Tab width="50%">Sign Up</Tab>
+            <Tab width="33%">Login</Tab>
+            <Tab width="33%">Sign Up</Tab>
+            <Tab width="33%">Forgot password</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -37,14 +39,12 @@ const HomePage = () => {
             <TabPanel>
                <Signup/>
             </TabPanel>
+             <TabPanel>
+               <ForgotPassword/>
+            </TabPanel>
+            
           </TabPanels>
-  </Tabs>
-
-
-
-
-   
-   
+  </Tabs>   
    </Box>
 
 

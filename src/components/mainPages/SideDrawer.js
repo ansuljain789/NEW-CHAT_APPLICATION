@@ -11,6 +11,9 @@ import axios from 'axios';
 import UserListItem from '../User details/UserListItem';
 import { getSender } from '../../config/ChatLogics';
 
+
+  const END = process.env.REACT_APP_ENDPOINT
+
 const SideDrawer = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
        
@@ -57,7 +60,7 @@ const SideDrawer = () => {
         },
       };
 
-      const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}`, config);
+      const { data } = await axios.get(`${END}/api/user?search=${search}`, config);
 
 
 
@@ -90,7 +93,7 @@ const SideDrawer = () => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`http://localhost:5000/api/chat`, { userId }, config);
+      const { data } = await axios.post(`${END}/api/chat`, { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
