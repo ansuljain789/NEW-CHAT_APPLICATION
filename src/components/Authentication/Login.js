@@ -6,8 +6,8 @@ import { useState } from "react";
 import axios from "axios";
  import { useNavigate} from "react-router-dom";
   import { ChatState } from "../../Context/contextProvider";
-  import {ChatPage} from "../../pages/ChatPage"
-  import ForgotPassword from "./ForgotPassword"; // ✅ default import
+  // import {ChatPage} from "../../pages/ChatPage"
+  // import ForgotPassword from "./ForgotPassword"; // ✅ default import
 
 
   const END = process.env.REACT_APP_ENDPOINT

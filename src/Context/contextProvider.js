@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
@@ -8,7 +7,7 @@ const ChatProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [notification, setNotification] = useState([]);
   const [chats, setChats] = useState();
-  const [reminders, setReminders] = useState([]); 
+  // const [reminders, setReminders] = useState([]); 
 
   const navigate = useNavigate();
 
