@@ -17,7 +17,7 @@ connectDB();
 app.use(express.json())
 // Allow requests from your frontend (localhost:3000)
 app.use(cors({
-  origin: 'https://chat-app-frontend-ansul-jains-projects.vercel.app/',  // Replace with your frontend URL
+  origin: 'https://chat-app-frontend-rosy-delta.vercel.app',  // Replace with your frontend URL
   methods: 'GET, POST, PUT, DELETE',  // Define allowed methods
   allowedHeaders: 'Content-Type, Authorization',  // Define allowed headers
 }));
@@ -48,7 +48,7 @@ const server = app.listen(
 const io = require("socket.io")(server,{
   pinTimeout:60000,
   cors:{
-    origin:"https://chat-app-frontend-ansul-jains-projects.vercel.app/",
+    origin:"https://chat-app-frontend-rosy-delta.vercel.app",
 
   }
 })
