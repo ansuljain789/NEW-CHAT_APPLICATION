@@ -10,6 +10,7 @@ function App() {
     <div className="App">
    <Routes>
     <Route path='/' Component={HomePage} />
+   
     <Route path='/chats' Component={ChatPage} />
     <Route path="/forgot" element={<ForgotPassword />} />
 

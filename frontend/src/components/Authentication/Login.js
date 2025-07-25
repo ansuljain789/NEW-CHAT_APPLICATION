@@ -59,7 +59,7 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-      console.log("login success",data);
+      console.log("login success");
       
        setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));

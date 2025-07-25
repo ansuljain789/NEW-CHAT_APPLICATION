@@ -95,27 +95,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        // setNewMessage("");
-        // const { data } = await axios.post(
-        //   // "http://localhost:5000/api/message",
-        //   `${END}/api/message`,
-        //   {
-        //     content: newMessage,
-        //     chatId: selectedChat,
-        //   },
-        //   config
-        // );
         const { data } = await axios.post(`${END}/api/message`, formData, config);
-        
-        // socket.emit("new message", data);
-        
-        // setMessages([...messages, data]);
-
+  
          setNewMessage("");
       setSelectedFile(null); // Clear preview
       setMessages([...messages, data]);
       socket.emit("new message", data);
       } catch (error) {
+  
+        
         toast({
           title: "Error Occured!",
           description: "either you blocked or Failed to send the Message",
@@ -131,7 +119,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
 
-    // Typing indicator logic
+  
 
     if (!socketConnected) return;
 
@@ -284,21 +272,6 @@ const startListening = () => {
     selectedChatCompare = selectedChat;
   }, [selectedChat]);
 
-  // useEffect(() => {
-  //   socket.on("message recieved", (newMessageRecieved) => {
-  //     if (
-  //       !selectedChatCompare || // if chat is not selected or doesn't match current chat
-  //       selectedChatCompare._id !== newMessageRecieved.chat._id
-  //     ) {
-  //        //give notification here
-  //     }
-  //     else{
-  //       // setMessages([...messages,newMessageRecieved._id]);
-  //       setMessages(prevMessages => [...prevMessages, newMessageRecieved]);
-
-  //     }
-  //   });
-  // });
 
   useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
