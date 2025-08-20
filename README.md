@@ -225,11 +225,7 @@ chat-app/
 │   │   └── main.jsx             # Entry point
 │   │
 │   └── vite.config.js
-│
-├── 📄 package.json
-├── 📄 README.md
-├── 📄 .env
-└── 📄 .gitignore
+└── 📄 README.md
 
 ▶️ How to Run the Project
 
