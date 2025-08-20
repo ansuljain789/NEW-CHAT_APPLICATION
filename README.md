@@ -2,13 +2,10 @@
 ```text
 # 💬 Real-Time Chat Application
 
-
 ## 📖 Overview
 The **Real-Time Chat Application** is a scalable and interactive communication platform built with the **MERN stack** and **Socket.io**.  
 It enables users to send and receive messages instantly with secure authentication, role-based access, reminders, and group chat features.  
 This project is designed to showcase **industry-level architecture, robust backend services, and modern UI/UX**  and **Gen-AI** to for proper maninataining the language of the user..
-
-
 
 ## ✨ Key Features
   🔹 **Real-Time Messaging** – Instant message delivery using Socket.io.  
@@ -20,7 +17,6 @@ This project is designed to showcase **industry-level architecture, robust backe
   🔹 **Responsive UI** – Optimized for all devices using Chakra UI.
   🔹 **Abusive Language Detection & Auto-Block** – If a user sends abusive or offensive words, the system detects it 
         and **automatically blocks** the user to maintain a safe environment.  
-
 
 ## 🔐 Secure User Authentication
    ✅ **JWT Authentication** – Protects all routes with access tokens.  
@@ -160,5 +156,84 @@ This project is designed to showcase **industry-level architecture, robust backe
      
    🔹MongoDB: Stores everything (users, chats, reminders, logs).
 
-   
+📂 Project Folder Structure:
+
+chat-app/
+│
+├── 📁 backend/                 # Node.js + Express Backend
+│   ├── 📁 config/               # Config files (db, environment, etc.)
+│   │   └── db.js
+│   │
+│   ├── 📁 middleware/           # Middlewares (auth, role check, abuse filter)
+│   │   ├── authMiddleware.js
+│   │   ├── roleMiddleware.js
+│   │   └── abuseFilter.js
+│   │
+│   ├── 📁 models/               # Mongoose Models
+│   │   ├── User.js
+│   │   ├── Chat.js
+│   │   ├── Reminder.js
+│   │   └── BlockedUser.js
+│   │
+│   ├── 📁 routes/               # Express Routes
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   ├── chatRoutes.js
+│   │   ├── reminderRoutes.js
+│   │   └── adminRoutes.js
+│   │
+│   ├── 📁 services/             # Business logic
+│   │   ├── authService.js
+│   │   ├── chatService.js
+│   │   ├── reminderService.js
+│   │   └── moderationService.js
+│   │
+│   ├── 📁 utils/                # Utility functions
+│   │   ├── generateToken.js
+│   │   └── logger.js
+│   │
+│   ├── server.js                # Entry point
+│   └── socket.js                # Socket.io real-time logic
+│
+├── 📁 frontend/                 # React + Vite Frontend
+│   ├── 📁 src/
+│   │   ├── 📁 components/       # Reusable UI Components
+│   │   │   ├── ChatWindow.jsx
+│   │   │   ├── MessageBubble.jsx
+│   │   │   └── ReminderModal.jsx
+│   │   │
+│   │   ├── 📁 pages/            # Pages
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── ChatRoom.jsx
+│   │   │   └── AdminDashboard.jsx
+│   │   │
+│   │   ├── 📁 context/          # React Context (Auth, Chat, etc.)
+│   │   │   ├── AuthContext.js
+│   │   │   └── ChatContext.js
+│   │   │
+│   │   ├── 📁 services/         # API Calls using Axios
+│   │   │   ├── authService.js
+│   │   │   ├── chatService.js
+│   │   │   └── reminderService.js
+│   │   │
+│   │   ├── 📁 utils/            # Helper functions
+│   │   │   ├── formatDate.js
+│   │   │   └── validateForm.js
+│   │   │
+│   │   ├── App.jsx              # Root Component
+│   │   └── main.jsx             # Entry point
+│   │
+│   └── vite.config.js
+│
+├── 📄 package.json
+├── 📄 README.md
+├── 📄 .env
+└── 📄 .gitignore
+
+
+
+
+
+
 
