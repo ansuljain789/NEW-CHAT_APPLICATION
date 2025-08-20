@@ -17,7 +17,7 @@ connectDB();
 app.use(express.json())
 // Allow requests from your frontend (localhost:3000)
 app.use(cors({
-  origin: 'https://chat-app-frontend-9exp.onrender.com',  // Replace with your frontend URL
+  origin: '*',  // Replace with your frontend URL
   methods: 'GET, POST, PUT, DELETE',  // Define allowed methods
   allowedHeaders: 'Content-Type, Authorization',  // Define allowed headers
 }));
