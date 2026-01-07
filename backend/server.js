@@ -45,6 +45,7 @@ const server = app.listen(
   console.log(`Server running on PORT ${PORT}...`)
 );
 
+const userSocketMap = {};
 const io = require("socket.io")(server,{
   pinTimeout:60000,
   cors:{
@@ -54,7 +55,7 @@ const io = require("socket.io")(server,{
 })
 
 io.on( "connection",(socket) =>{
-  console.log("Connected to socket.io");
+  console.log("Connected to socket.io",socket.id);
 
 
   socket.on("setup", (userData) => {
@@ -89,7 +90,13 @@ io.on( "connection",(socket) =>{
   socket.on("deleteMessage", (messageId) => {
     io.emit("messageDeleted", messageId); // Broadcast to all users
   });
-  socket.off("setup",() =>{
+
+
+  
+
+
+  // cleanup on disconnect
+socket.off("setup",() =>{
     console.log("USER DISCONNECTED");
     socket.leave(userData._id)
     

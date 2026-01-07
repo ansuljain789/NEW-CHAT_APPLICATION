@@ -5,6 +5,7 @@ import {
   Button,
   Flex,
   FormControl,
+  HStack,
   IconButton,
   Image,
   Input,
@@ -25,6 +26,8 @@ import { BsSend } from "react-icons/bs";
 import { useRef } from "react";
 import { FaMicrophone } from "react-icons/fa";
 import { FiPaperclip } from "react-icons/fi";
+import VoiceCall from "./voiceCall";
+import { FiPhone } from "react-icons/fi";
 
 
 import Lottie from "react-lottie";
@@ -41,6 +44,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+// --- Voice call state ---
+
+
 
   const defaultOptions = {
     loop: true,
@@ -54,15 +60,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { user, selectedChat, setSelectedChat, notification, setNotification } =
     ChatState();
 
+   
+
   const toast = useToast();
 
-  useEffect(() => {
-    socket = io(END);
-    socket.emit("setup", user);
-    socket.on("connected", () => setSocketConnected(true));
-    socket.on("typing", () => setIsTyping(true));
-    socket.on("stop typing", () => setIsTyping(false));
-  }, []);
+ useEffect(() => {
+  socket = io(END);
+  socket.emit("setup", user);
+  socket.on("connected", () => setSocketConnected(true));
+  socket.on("typing", () => setIsTyping(true));
+  socket.on("stop typing", () => setIsTyping(false));
+
+}, []); // keep your original deps; if you had [user], add the handlers inside that effect
+
 
   useEffect(() => {
     socket.on("messageDeleted", (deletedMessageId) => {
@@ -265,6 +275,10 @@ const startListening = () => {
   recognitionRef.current = recognition;
 };
 
+// inside SingleChat.js
+
+
+
 
   useEffect(() => {
     fetchMessages();
@@ -318,11 +332,15 @@ const startListening = () => {
             {!selectedChat.isGroupChat ? (
               <>
                 {getSender(user, selectedChat.users)}
+               
                 <ProfileModal user={getSenderFull(user, selectedChat.users)} />
+
+               
               </>
             ) : (
               <> 
                 {selectedChat.chatName.toUpperCase()}
+        
                 
                 <UpdateGroupChatModal
                   fetchAgain={fetchAgain}
@@ -333,6 +351,14 @@ const startListening = () => {
             )}
 
              {/* voice call will added here */}
+
+      
+
+
+
+
+             
+             
 
           
           </Text>
